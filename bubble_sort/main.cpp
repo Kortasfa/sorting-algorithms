@@ -1,33 +1,48 @@
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include <windows.h>
 #include <config.h>
 
+using namespace std;
+
+int bubbleSort(vector<int> &array) {
+    for (size_t limit = array.size() - 1; limit > 0; limit -= 1) {
+        for (size_t item = 0; item < limit; item++) {
+            if (array[item] > array[item + 1]) {
+                int temp = array[item];
+                array[item] = array[item + 1];
+                array[item + 1] = temp;
+            }
+        }
+    }
+    for (size_t i = 0; i < array.size(); i++) {
+        cout << array[i] << " ";
+    }
+    return 0;
+}
+
 int main() {
     SetConsoleOutputCP(CP_UTF8);
-    // Путь к файлу test1.txt
-    const char* file1_path = TEST1_TXT_PATH;
+    const char *file1_path = TEST1_TXT_PATH;
+    const char *file2_path = TEST2_TXT_PATH;
+    int number;
+    vector<int> arrayToSort;
 
-    // Путь к файлу test2.txt
-    const char* file2_path = TEST2_TXT_PATH;
+    ifstream file1(file1_path);
 
-    // Попробуйте открыть файл test1.txt для чтения
-    std::ifstream file1(file1_path);
-    if (file1.is_open()) {
-        std::cout << "Файл " << file1_path << " доступен для чтения." << std::endl;
-        file1.close();
-    } else {
-        std::cerr << "Ошибка: Файл " << file1_path << " недоступен." << std::endl;
+    if (!file1.is_open()) {
+        cerr << "Не удалось открыть файл!" << endl;
+        return 1;
     }
 
-    // Попробуйте открыть файл test2.txt для чтения
-    std::ifstream file2(file2_path);
-    if (file2.is_open()) {
-        std::cout << "Файл " << file2_path << " доступен для чтения." << std::endl;
-        file2.close();
-    } else {
-        std::cerr << "Ошибка: Файл " << file2_path << " недоступен." << std::endl;
+    while (file1 >> number) {
+        arrayToSort.push_back(number);
     }
+
+    bubbleSort(arrayToSort);
+
+    file1.close();
 
     return 0;
 }
