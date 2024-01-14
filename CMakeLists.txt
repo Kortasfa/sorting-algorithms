@@ -4,6 +4,7 @@ project(SortingAlgorithms)
 
 add_subdirectory(bubble_sort)
 add_subdirectory(quick_sort)
+add_subdirectory(selection_sort)
 # Добавьте сюда другие подпроекты, если необходимо
 
 get_filename_component(CURRENT_DIR_ABSOLUTE ${CMAKE_CURRENT_SOURCE_DIR} ABSOLUTE)
